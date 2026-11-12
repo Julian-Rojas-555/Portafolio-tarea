@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media — Minimal</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --border: #e5e5e5;
+      --accent: #2563eb;
+      --radius: 8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 4rem;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 4rem;
+    }
+
+    .label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* Video */
+    .video-box {
+      width: 100%;
+      background: #000;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-box video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Two column layout */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) {
+      .split {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    /* Audios */
+    .audio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .audio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.4rem;
+    }
+
+    .audio-card h3 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .audio-card audio {
+      width: 100%;
+      height: 36px;
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #f0f0f0;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s ease;
+      height: 320px;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 1.2rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      color: #fff;
+      font-size: 0.85rem;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+      transition: background 0.2s;
+      z-index: 5;
+    }
+
+    .nav-btn:hover {
+      background: #fff;
+    }
+
+    .nav-btn.prev { left: 12px; }
+    .nav-btn.next { right: 12px; }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 1rem;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #d4d4d4;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      transform: scale(1.15);
+    }
+
+    /* Footer note */
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 2rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 2.5rem 1.25rem 4rem;
+      }
+      .carousel-track {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <h1>Media</h1>
+      <p>Video, audio e imágenes</p>
+    </header>
+
+    <!-- VIDEO -->
+    <section>
+      <div class="label">Video</div>
+      <div class="video-box">
+        <!-- Cambia la ruta por tu video -->
+        <video controls>
+          <source src="/video/Presentación de pasantía en JARS.mp4" type="video/mp4">
+          Tu navegador no soporta video.
+        </video>
+      </div>
+    </section>
+
+    <!-- AUDIOS + CARRUSEL -->
+    <section class="split">
+      <!-- Columna izquierda: Audios -->
+      <div>
+        <div class="label">Audios</div>
+        <div class="audio-list">
+          <div class="audio-card">
+            <h3>Audio 1</h3>
+            <!-- Cambia la ruta por tu audio -->
+            <audio controls>
+              <source src="/audios/heygen-speech.wav" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="audio-card">
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Carrusel -->
+      <div>
+        <div class="label">Imágenes</div>
+        <div class="carousel">
+          <div class="carousel-track" id="track">
+            <div class="carousel-slide">
+              <!-- Cambia la ruta por tu imagen -->
+              <img src="/img/Captura de pantalla 2026-11-11 205528.png" alt="Imagen 1">
+              <div class="carousel-caption">Imagen 1</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="/img/Captura de pantalla 2026-11-11 205555.png" alt="Imagen 2">
+              <div class="carousel-caption">Imagen 2</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="/img/Captura de pantalla 2026-11-11 221552.png" alt="Imagen 3">
+              <div class="carousel-caption">Imagen 3</div>
+            </div>
+          </div>
+          <button class="nav-btn prev" id="prev" aria-label="Anterior">‹</button>
+          <button class="nav-btn next" id="next" aria-label="Siguiente">›</button>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </section>
+
+    <p class="note">Reemplaza las rutas (tu-video.mp4, tu-audio-1.mp3, tu-imagen-1.jpg…) por tus archivos.</p>
+  </div>
+
+  <script>
+    const track = document.getElementById('track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const dotsBox = document.getElementById('dots');
+
+    let index = 0;
+    const total = slides.length;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => go(i));
+      dotsBox.appendChild(d);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    function go(i) {
+      index = i;
+      update();
+    }
+
+    next.addEventListener('click', () => {
+      index = (index + 1) % total;
+      update();
+    });
+
+    prev.addEventListener('click', () => {
+      index = (index - 1 + total) % total;
+      update();
+    });
+  </script>
+</body>
+</html>
